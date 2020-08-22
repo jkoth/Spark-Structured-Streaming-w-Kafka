@@ -76,7 +76,7 @@ def run_spark_job(spark):
            .outputMode("complete") \
            .format("console") \
            .queryName("Windowed Aggregation by Crime Type") \
-           .trigger(processingTime='10 seconds') \
+           .trigger(processingTime='15 seconds') \
            .option("truncate", False) \
            .start()
            
@@ -105,13 +105,12 @@ def run_spark_job(spark):
             .writeStream \
             .format("console") \
             .queryName("Windowed Radio Code Join") \
-            .trigger(processingTime='10 seconds') \
+            .trigger(processingTime='15 seconds') \
             .option("truncate", False) \
             .start()
 
     # Wait for ANY query to terminate
     spark.streams.awaitAnyTermination()
-    print("=================Hello===============")
 
 if __name__ == "__main__":
     logger = logging.getLogger(__name__)
